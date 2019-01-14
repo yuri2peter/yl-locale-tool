@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../public/common.js"></script>
+  <title>路径有误</title>
+</head>
+<body>
+  <h1>路径有误，找不到对应文件!</h1>
+  <ul>
+    <script>
+      const data = JSON.parse($_GET['data']);
+      const { files } = data;
+      document.write(files.map(t => `<li>${t}</li>`).join(''));
+    </script>
+  </ul>
+  <a href="./select-dir.html"><button>重新指定</button></a>
+</body>
+</html>

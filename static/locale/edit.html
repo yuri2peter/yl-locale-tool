@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>编辑语言</title>
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <!-- normal script imports etc  -->
+  <script src="../public/common.js"></script>
+  <script src="../public/jquery-2.2.4.min.js"></script>
+  <script src="../public/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <!-- Insert this line after script imports -->
+  <script>if (window.module) module = window.module;</script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <style>
+    #app {
+      margin: 0 auto;
+      margin-top: 20px;
+      width: 640px;
+    }
+
+    #tree {
+      max-height: 640px;
+      overflow: auto;
+      margin-top: 1em;
+    }
+
+    .large-input {
+      min-width: 20em;
+    }
+    .lang-preview {
+      font-size: 12px;
+      color: gray;
+      margin-left: 1em;
+      display: inline-block;
+      max-width: 8em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <el-card>
+    <el-input
+            placeholder="输入关键字进行过滤"
+            v-model="filterText">
+    </el-input>
+    <el-tree
+            id="tree"
+            ref="tree"
+            :data="tree"
+            node-key="id"
+            draggable
+            highlight-current
+            :filter-node-method="filterNode"
+    >
+      <span class="custom-tree-node" slot-scope="{ node, data }">
+        <el-popover
+                :key="data.id"
+                placement="right"
+                :title="data.label"
+                width="400"
+                trigger="hover"
+        >
+          <span slot="reference">{{ node.label }}</span>
+          <div>
+            <p>name: <input class="large-input" v-model="data.label"></p>
+            <p v-if="!data.children" v-for="type in langTypes">
+              {{type}}: <input class="large-input" v-model="data[type]">
+            </p>
+            <p>
+              <el-button size="mini" @click="append(data.id)">添加子项</el-button>
+              <el-button size="mini" @click="insertAfter(data.id)">添加兄弟</el-button>
+              <el-button size="mini" @click="remove(data.id)">删除</el-button>
+            </p>
+          </div>
+        </el-popover>
+        <span :title="data[type]" class="lang-preview" v-if="!data.children" v-for="type in langTypes">
+           {{data[type]}}
+        </span>
+      </span>
+    </el-tree>
+    <el-button @click="onSave" type="primary" size="small" style="margin: 1em 0 ;float: right">保存修改</el-button>
+    <el-button @click="load" type="primary" size="small" style="margin: 1em ;float: right">刷新</el-button>
+  </el-card>
+</div>
+<script src="./edit.js"></script>
+</body>
+</html>

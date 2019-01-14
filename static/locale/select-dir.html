@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>指定目录</title>
+</head>
+<body>
+  <h1>请指定语言目录</h1>
+  <form action="./index" method="get" id="form">
+    <input name="dir" style="width: 20em;" placeholder="/locales" required>
+    <br />
+    <br />
+    <button>提交</button>
+  </form>
+  <script>
+    const key = 'locale-dir';
+    const form = document.getElementById('form');
+    form.dir.value = localStorage.getItem(key);
+    form.onsubmit = function () {
+      const dir = form.dir.value;
+      localStorage.setItem(key, dir);
+    }
+  </script>
+</body>
+</html>

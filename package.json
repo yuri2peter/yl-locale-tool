@@ -1,0 +1,35 @@
+{
+  "name": "yl-locale-tool",
+  "version": "1.0.0",
+  "description": "button-dev-tools",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "web": "node web.js",
+    "build": "npm run build-win && npm run build-linux && npm run build-mac",
+    "build-win": "electron-packager . locale-tools --platform=win32 --arch=x64 --out ./build --app-version 1.0.0 --overwrite",
+    "build-linux": "electron-packager . locale-tools --platform=linux --arch=x64 --out ./build --app-version 1.0.0 --overwrite",
+    "build-mac": "electron-packager . locale-tools --platform=darwin --arch=x64 --out ./build --app-version 1.0.0 --overwrite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuri2peter/yl-locale-tool.git"
+  },
+  "author": "yuri2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuri2peter/yl-locale-tool/issues"
+  },
+  "homepage": "https://github.com/yuri2peter/yl-locale-tool#readme",
+  "dependencies": {
+    "const": "^1.0.0",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "electron": "^4.0.1",
+    "electron-packager": "^13.0.1"
+  }
+}
